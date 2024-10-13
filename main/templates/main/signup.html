@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <title>Now We Talk</title>
+    <!--
+    <link rel="stylesheet" href=".css">
+    -->
+ </head>
+ <body>
+    <header>
+        <h1>Now We Talk</h1>   
+
+        <form action="{% url 'signup'%}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="username" id="username" placeholder="Username" class="inputBox" ><br/><br/>         
+            <input type="text" name="firstname" id="firstname" placeholder="First Name" class="inputBox"><br/><br/>  
+            <input type="text" name="lastname" id="lastname" placeholder="Last Name" class="inputBox"><br/><br/>
+             
+            <label>Date of Birth</label>
+            <input type="date" name="birthdate" id="birthdate" placeholder="Date of Birth" class="inputBox"><br/><br/>
+            {% include 'main/language_selection.html' %}
+            <input type="text" name="email" id="email" placeholder="Email" class="inputBox"><br/><br/> 
+            <input type="password" name="password" id="password"  placeholder="Password" class="inputBox"><br/><br/>
+            <input type="submit" value="JOIN" id="signup"> 
+        </form>    
+
+   <p><b><a id="pwreset" href="{%url 'pw_recovery'%}">Forgot your password?</a></b></p>
+   <br/>
+   {% if messages %}
+      <script>
+        {% for message in messages %}
+           alert("{{ message }}");
+        {% endfor %}
+      </script>
+   {% endif %}
+   <p>Already have an Account? <b><a id="login" href="{%url 'login'%}">Sign In</a></b></p>
+
+
+ </body>
+</html>

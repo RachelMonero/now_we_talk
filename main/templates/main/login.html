@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <title>Now We Talk</title>
+    <!--
+    <link rel="stylesheet" href=".css">
+    -->
+ </head>
+ <body>
+    <header>
+        <h1>Now We Talk</h1>   
+
+    </header>
+    {% if messages %}
+    <script>
+      {% for message in messages %}
+         alert("{{ message }}");
+       {% endfor %}
+    </script>
+    {% endif %}
+    <form action="/" method="POST">
+      {% csrf_token %}
+      <input type="text" name="login-email" id="login-email" placeholder="Email"><br/>
+      <input type="password" name="password" id="password" placeholder="Password"><br/>
+      <input type="submit" value="SIGN IN" id="logIn">   
+
+    </form> 
+   <p><b><a id="pwreset" href="{%url 'pw_recovery'%}">Forgot your password?</a></b></p>
+   <br/>
+   <p>Don't have an accout? <b><a id="signup" href="{%url 'signup'%}">Sign up</a></b></p>
+
+
+ </body>
+</html>

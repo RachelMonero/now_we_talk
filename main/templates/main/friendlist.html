@@ -1,0 +1,9 @@
+<label>Friends</label>
+<ul>
+    {% for friend in friendslist %}
+    <li> 
+
+       <a href="{% url 'create_chatroom' friend.user_id %}"> {{friend.username}} </a>
+    </li>
+    {% endfor %}
+</ul>

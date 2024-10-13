@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <title>Now We Talk</title>
+    <!--
+    <link rel="stylesheet" href=".css">
+    -->
+ </head>
+ <body>
+    <header>
+        <h1>Now We Talk</h1>   
+
+        <form action="{% url 'verification'%}" method="POST">
+            {% csrf_token %}
+            <h2> Please enter your verification code </h2>
+            {% if messages %}
+               <script>
+                 {% for message in messages %}
+                    alert("{{ message }}");
+                 {% endfor %}
+               </script>
+            {% endif %}
+            <input type="text" name="verification_code" id="verification_code" placeholder="Verification Code" class="inputBox" ><br/><br/>                     
+            <input type="submit" value="ENTER" id="verification"> 
+        </form>    
+
+
+
+
+ </body>
+</html>

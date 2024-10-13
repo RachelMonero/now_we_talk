@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <title>Now We Talk</title>
+    <!--
+    <link rel="stylesheet" href=".css">
+    -->
+ </head>
+ <body>
+    <header>
+        <h1>Now We Talk</h1>   
+        {% include 'main/navi_bar.html' %}
+        <br/><br/> 
+        {% include 'main/friendlist.html' %}
+    
+        <form action="{% url 'home'%}" method="POST">
+
+            {% csrf_token %}
+            <input type="text" name="username" id="username" placeholder="Username" class="inputBox" ><br/><br/>         
+            <input type="text" name="email" id="email" placeholder="Email" class="inputBox"><br/><br/> 
+            <input type="submit" value="Generate Temperary Password" id="pw_recovery"> 
+        </form>    
+   <br/>
+   {% if messages %}
+     <script>
+       {% for message in messages %}
+          alert("{{ message }}");
+        {% endfor %}
+     </script>
+   {% endif %}
+   <p>Don't have an accout? <b><a id="signup" href="{%url 'signup'%}">Sign up</a></b></p>
+
+
+ </body>
+</html>
