@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <title>Now We Talk</title>
+    <!--
+    <link rel="stylesheet" href=".css">
+    -->
+ </head>
+ <body>
+    <header>
+        <h1>Now We Talk</h1>   
+        {% include 'main/navi_bar.html' %}
+        <br/><br/> 
+    
+        <form action="{% url 'profile_update'%}" method="POST">
+
+            {% csrf_token %}
+            <label>Username</label>
+            <input type="text" name="update_username" id="updatee_username" placeholder="{{username}}" class="inputBox" ><br/><br/>
+            <label>Email</label>         
+            <input type="text" name="email" id="email" placeholder="{{email}}" class="inputBox" readonly><br/><br/> 
+            <label>Password</label>         
+            <input type="password" name="update_password" id="update_password" placeholder="*********" class="inputBox"><br/><br/> 
+            <label>Full name</label>
+            <input type="text" name="update_first_name" id="update_first_name" placeholder="{{first_name}}" class="inputBox">
+            <input type="text" name="update_last_name" id="update_last_name" placeholder="{{last_name}}" class="inputBox"><br/><br/> 
+            <label> Date of Birth</label>
+            <input type="text" name="date_of_birth" id="date_of_birth" placeholder="{{date_of_birth}}" class="inputBox" readonly><br/><br/> 
+            
+            <label>Language</label>
+            <input type="text" name="previous_language" id="previous_language" placeholder="{{language}}" class="inputBox"readonly>
+            {% include 'main/language_selection.html' %} <br/><br/> 
+            <label>Verification Code</label>
+            <input type="text" name="profile_update_verification_code" id="profile_update_verification_code" class="inputBox" ><br/><br/>
+            <input type="submit" value="ENTER" id="change_profil"> 
+
+        </form>    
+   <br/>
+   {% if messages %}
+     <script>
+       {% for message in messages %}
+          alert("{{ message }}");
+        {% endfor %}
+     </script>
+   {% endif %}
+
+
+
+ </body>
+</html>

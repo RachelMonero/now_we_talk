@@ -9,5 +9,8 @@ urlpatterns = [
     path('pw_recovery/',views.pw_recovery, name='pw_recovery'),
     path('verification/',views.verification, name='verification'),
     path('home/',views.home, name='home'),
-    path('create_chatroom/<str:friend_user_id>',views.create_chatroom, name='create_chatroom'),
+    path('profile/',views.profile, name='profile'),
+    path('profile_update/', views.profile_update, name='profile_update'),
+    path('contact/', views.contact, name='contact' ),
+
 ]

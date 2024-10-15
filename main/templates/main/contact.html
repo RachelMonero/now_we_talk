@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <title>Now We Talk</title>
+    <!--
+    <link rel="stylesheet" href=".css">
+    -->
+ </head>
+ <body>
+    <header>
+        <h1>Now We Talk</h1>
+        {% include 'main/navi_bar.html' %}   
+
+        <form action="{% url 'contact'%}" method="POST">
+            {% csrf_token %}
+            <h2> Contact Us </h2>
+            {% if messages %}
+               <script>
+                 {% for message in messages %}
+                    alert("{{ message }}");
+                 {% endfor %}
+               </script>
+            {% endif %}
+            <input type="text" name="contact_from_name" id="contact_from_name" placeholder="Name" class="inputBox" ><br/><br/>
+            <input type="text" name="contact_from_email" id="contact_from_email" placeholder="Email" class="inputBox" ><br/><br/>
+            <input type="text" name="contact_from_subject" id="contact_from_subject" placeholder="Subject" class="inputBox" ><br/><br/>
+            <input type="text" name="contact_from_message" id="contact_from_message" placeholder="Context" class="inputBox" ><br/><br/>                       
+            <input type="submit" value="SEND" id="contact"> 
+        </form>    
+
+
+
+
+ </body>
+</html>
