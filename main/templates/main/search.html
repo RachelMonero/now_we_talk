@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <title>Now We Talk</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home_basic.css' %}">
+    <link rel="stylesheet" href="{% static 'search_style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+ </head>
+ <body>
+    <header>
+        <h1 id="application_name">Now We Talk</h1>   
+
+    {% include 'main/navi_bar.html' %}
+    </header>
+    <br/><br/> 
+<div class= "search_container">
+   <div class="search_bar">
+        <form action="{% url 'search'%}" method="POST">  
+            {% csrf_token %}
+            <select name="search_by" id="search_by">
+               <option value="" disabled selected>Search By ⏷</option>
+               <option value="username">Username</option>
+               <option value="email">Email</option>
+               <option value="last_name">Last Name</option>
+               <option value="first_name">First Name</option>
+            </select>
+            <input type="text" class="input_box" name="search_friend" id="search_friend">
+            <input type="submit" value="Search" class="search_button">  
+        </form>
+   </div> 
+   <div class="search_result">
+   {% if search_results %}
+        <ul>
+        {% for user in search_results %}
+            <li>{{ user.username }} : {{ user.first_name }} {{ user.last_name }} 
+                <form action="{% url 'add_to_myfriend' user.user_id %}" method="POST" style="display: inline;">
+                    {% csrf_token %}
+                    
+                    <button type="submit" id="add_to_myfriend">Add</button>
+                </form>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+    <p>No results found.</p>
+    {% endif %}
+    </div>
+</div>
+
+   {% if messages %}
+     <script>
+       {% for message in messages %}
+          alert("{{ message }}");
+        {% endfor %}
+     </script>
+   {% endif %}
+
+
+
+ </body>
+</html>

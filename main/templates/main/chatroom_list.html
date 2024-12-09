@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <title>Now We Talk</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home_basic.css' %}">
+    <link rel="stylesheet" href="{% static 'chatlist_style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+ </head>
+ <body>
+    <header>
+        <h1 id="application_name">Now We Talk</h1>   
+    </header>
+    {% include 'main/navi_bar.html' %}
+    <br/><br/> 
+
+    <div class= "chatroomlist_container">
+     {% load static %}
+     {% if chatroomlist %}
+        <table class="chatroomlist_management">
+            <thead class="thead_container">
+                <tr>
+                    <th class="td_no"> No.</th> 
+                    <th class="td_else">Chatroom Name</th>
+                    <th class="td_else">Creation Date</th>
+                    <th class="td_else_btn">
+                     <form action="{% url 'leave_chatroom'%}" method="POST"> 
+                      {% csrf_token %}
+                       <button type="submit" name="leave_chatroom_button" id="leave_chatroom_button"  value="{{ chatroom.chatroom_id }}">LEAVE</button><br/><br/>
+                   </th>
+                </tr>
+            </thead> 
+             {% for chatroom in chatroomlist %}
+  
+               <tr id="chatroomlist_table_row">
+                 <td class="td_no">{{ forloop.counter }}</td>
+                 <td class="td_else">                  
+                    <a id="chatroom_admin">{{ chatroom.admin_id.username }}</a> &amp; 
+                    <a id="chatroom_participant">{{ chatroom.participant_id.username }}</a>                    
+                 </td>    
+                 <td class="td_else">
+                  <a id="chatroom_created_at">{{ chatroom.created_at }}</a>
+                 </td> 
+                 <td class="td_else_btn">
+                    <input type="checkbox" id="leave_chatroom" name="leave_chatroom_id" value="{{ chatroom.chatroom_id }}">
+                 </td>   
+   
+
+               </tr>
+              {% endfor %}
+            </form>
+        </table>
+     {%else%} 
+     <p class="msg">You are not currently part of any chatrooms.</p>
+     {%endif%}
+   </div>

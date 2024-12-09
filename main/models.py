@@ -51,7 +51,7 @@ class Verification(models.Model):
 
 # Create Friendship model
 class Friendship(models.Model):
-    friendship_id = models.IntegerField(primary_key=True, db_column='friendship_id')
+    friendship_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, db_column='friendship_id')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_friendships', db_column='user')
     friend = models.ForeignKey(User, on_delete=models.CASCADE, related_name='friend_friendships', db_column='friend')
 
@@ -66,7 +66,7 @@ class Chatroom(models.Model):
 # Create Chat model
 class Chat(models.Model):
     chat_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, db_column='chat_id')
-    chat_type = models.CharField(max_length=5, db_column='chat_type')
+    chat_type = models.CharField(max_length=20, db_column='chat_type')
     creator_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_chats', db_column='creator_id')
     chatroom_id = models.ForeignKey(Chatroom, on_delete=models.CASCADE, related_name='chatroom_chats', db_column='chatroom_id')
     created_at_timestamp = models.DateTimeField(auto_now_add=True, db_column='created_at_timestamp')
@@ -74,6 +74,9 @@ class Chat(models.Model):
     original_text_msg = models.TextField(db_column='original_text_msg')
     translated_text_msg = models.TextField(db_column='translated_text_msg')
     translated_voice_msg = models.BinaryField(null=True, db_column='translated_voice_msg')
+
+    def __str__(self):
+        return f"Chat {self.chat_id} - {self.chat_type}"
 
 
 

@@ -1,0 +1,124 @@
+
+* {
+ 
+    font-family: sans-serif;
+
+}
+
+#application_name{
+
+    font-family: 'Bungee', sans-serif;
+    font-size: 40px;
+    font-weight:300;
+    color: #1babff;
+    text-align: end;
+    margin-right:2%;
+}
+
+
+
+.navi_bar{
+    background-color: white;
+	outline: none;
+    margin-left:1%;
+    margin-bottom: 15px;
+    margin-top:-30px;
+    padding-top:10px;
+    padding-left: 16px;
+    border-radius: 30px;
+
+    border-bottom-width: 0.5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 15px;
+
+
+    width: 97%;
+    height: 26px;
+    font-weight: 600;
+    align-self: auto;
+
+}
+
+.navi_bar a{
+    text-decoration: none;
+   
+    padding-right: 20px;
+    color: #ffee95;
+    font-size: 16px;
+    margin:auto;
+}
+
+.navi_bar a:hover {
+    color: #D9D9D9;
+}
+ 
+body{
+    background-color: #ffee95;
+
+}
+.friendlist_chatroom_container {
+    display: flex;              
+    justify-content: space-between; 
+    align-items: center;     
+    gap: 1%;                 
+    margin: 0 1%;              
+}
+
+
+#friend_list_title{
+    background-color: #7ED0FF;
+    color:#ffee95;
+    outline: none;
+    padding: 5px 30px;
+    border-radius: 15px;
+    font-size: large;
+    margin-top: 0px;
+    margin-left:1%;
+
+}
+
+
+.friend_list_container{
+    list-style-type: none;
+    margin-top: -10px;
+    margin-left:1%;
+    padding-top:35px;
+    padding-left:20px;
+
+    width:160px;
+    height: 300px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#open_chat {
+    width: 22px;
+    height: 22px;
+    border-radius: 80%;
+    border: none;
+    background-color: #7ED0FF;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding-left: 1.5px;
+    align-items: center;
+}
+
+
+
+#friend_username{
+
+
+   font-size: 16px;
+   margin-left:5px;
+   color:#9f9f9fc6;
+
+}
+
+#friend_list_row{
+    align-items: center;
+    display: flex;
+    padding: 3px 0;
+
+}
+
+    

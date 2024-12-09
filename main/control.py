@@ -2,7 +2,7 @@ from datetime import datetime,date
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
 from main.models import Chatroom, Friendship, Verification, User
-from main.services import email_service
+
 
 # check if username exists in db
 def exist_username(username):
@@ -26,9 +26,13 @@ def matching_info(username,email):
 def login_info(email, password):
     try: 
         user =  User.objects.get(email=email)
-        return check_password(password, user.password)
+        print(f"user.password (hashed): {user.password}")
+        if check_password(password, user.password):
+          return True
     except User.DoesNotExist:
+        print(user.password)
         return False
+    
     
 # check user verification status by email   
 def is_verified_user(email):
@@ -58,7 +62,7 @@ def find_user_id(email):
         return user.user_id
     except User.DoesNotExist:
         return None
-    
+
 # check existing verification code
 def exist_verification_code(user_id):
     print(f"exist_verification_code function:{user_id}")
@@ -72,33 +76,21 @@ def valid_verification_code(user_id,verification_code):
         return True
     return False
 
-def find_friend_list(user_id):
+
+
+def find_exist_chatroom(user_id,friend_user_id):
+    print(f"find_exist_chatroom function:{user_id}, {friend_user_id}")
+
     try:
-        friendships= Friendship.objects.filter(user=user_id)
-        friend_ids= []
+           chatroom = Chatroom.objects.get(admin_id=user_id, participant_id =friend_user_id)
+           return chatroom.chatroom_id
+        
+    except Chatroom.DoesNotExist:
 
-        for friendship in friendships:
-            friend=find_user_id(friendship.friend)
-            print(f"Friendship: {friendship.friend}, {friend}")
-            friend_ids.append(friend)
+        try: 
+            chatroom=Chatroom.objects.get(admin_id=friend_user_id, participant_id= user_id)
+            return chatroom.chatroom_id
+        
+        except Chatroom.DoesNotExist:
 
-        friends = User.objects.filter(user_id__in=friend_ids)
-        return list(friends)
-                    
-                    
-    except Exception as e:
-        print(f"An error occurred: {e}")  # for debugging
-        return []
-    
-def verificate_user(email, verification_code):
-    
-
-     subject = "[ Now We Talk ] Verification Code"
-     message = (f"Your verification Code is {verification_code}")
-     email_service(email, subject, message)
-
-
-
-    
-     
-
+               return None

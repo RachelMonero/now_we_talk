@@ -3,21 +3,24 @@
  <head>
     <meta charset="UTF-8">
     <title>Now We Talk</title>
-    <!--
-    <link rel="stylesheet" href=".css">
-    -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'pw_recovery_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'login_signup_styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
  </head>
  <body>
     <header>
         <h1>Now We Talk</h1>   
-
-        <form action="{% url 'pw_recovery'%}" method="POST">
+    </header>
+       <div class:"input_box_container" id="pw_recovery_box">
+         <form action="{% url 'pw_recovery'%}" method="POST">
             {% csrf_token %}
-            <input type="text" name="username" id="username" placeholder="Username" class="inputBox" ><br/><br/>         
-            <input type="text" name="email" id="email" placeholder="Email" class="inputBox"><br/><br/> 
-            <input type="submit" value="Generate Temperary Password" id="pw_recovery"> 
-        </form>    
-   <br/>
+            <input type="text" name="username" id="username" placeholder="Username" class="input_box_pw" ><br/><br/>         
+            <input type="text" name="email" id="email" placeholder="Email" class="input_box_pw"><br/><br/> 
+            <input type="submit" value="Generate Temperary Password" id="pw_recovery_button"> 
+         </form>    
+         <br/>
+       </div>
    {% if messages %}
      <script>
        {% for message in messages %}
@@ -25,8 +28,9 @@
         {% endfor %}
      </script>
    {% endif %}
+   <div id="signup_link">
    <p>Don't have an accout? <b><a id="signup" href="{%url 'signup'%}">Sign up</a></b></p>
-
+   </div>
 
  </body>
 </html>

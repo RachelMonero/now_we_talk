@@ -3,40 +3,47 @@
  <head>
     <meta charset="UTF-8">
     <title>Now We Talk</title>
-    <!--
-    <link rel="stylesheet" href=".css">
-    -->
- </head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login_signup_styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+
  <body>
     <header>
-        <h1>Now We Talk</h1>   
+      <h1>  Now We Talk</h1>    
+    </header>
+      {% if messages %}
+         <script>
+           {% for message in messages %}
+              alert("{{ message }}");
+           {% endfor %}
+         </script>
+      {% endif %}
 
-        <form action="{% url 'signup'%}" method="POST">
+        <div id="signup_box"> 
+
+          <form action="{% url 'signup'%}" method="POST">
             {% csrf_token %}
-            <input type="text" name="username" id="username" placeholder="Username" class="inputBox" ><br/><br/>         
-            <input type="text" name="firstname" id="firstname" placeholder="First Name" class="inputBox"><br/><br/>  
-            <input type="text" name="lastname" id="lastname" placeholder="Last Name" class="inputBox"><br/><br/>
-             
-            <label>Date of Birth</label>
-            <input type="date" name="birthdate" id="birthdate" placeholder="Date of Birth" class="inputBox"><br/><br/>
-            <label>Language</label>
+            <label class="signup_label">User Name </label>
+            <input type="text" name="username" id="username" class="inputBox" ><br/><br/>     
+            <label class="signup_label">First Name</label>
+            <input type="text" name="firstname" id="firstname" class="inputBox"><br/><br/>  
+            <label class="signup_label">Last Name</label>
+            <input type="text" name="lastname" id="lastname" class="inputBox"><br/><br/>
+            <label class="signup_label">Email </label>
+            <input type="text" name="email" id="email" class="inputBox"><br/><br/> 
+            <label class="signup_label">Password</label>
+            <input type="password" name="password" id="password" class="inputBox"><br/><br/>
+            <label class="signup_label">Date of Birth</label>
+            <input type="date" name="birthdate" id="birthdate"  class="inputBox"><br/><br/>
+            <label class="signup_label">Language</label>
             {% include 'main/language_selection.html' %}
-            <input type="text" name="email" id="email" placeholder="Email" class="inputBox"><br/><br/> 
-            <input type="password" name="password" id="password"  placeholder="Password" class="inputBox"><br/><br/>
-            <input type="submit" value="JOIN" id="signup"> 
-        </form>    
+            <input type="submit" value="JOIN" class="sign_in_up" id="join_button"> 
+          </form>    
 
-   <p><b><a id="pwreset" href="{%url 'pw_recovery'%}">Forgot your password?</a></b></p>
-   <br/>
-   {% if messages %}
-      <script>
-        {% for message in messages %}
-           alert("{{ message }}");
-        {% endfor %}
-      </script>
-   {% endif %}
-   <p>Already have an Account? <b><a id="login" href="{%url 'login'%}">Sign In</a></b></p>
-
+        </div>
+        <div id="signin_link">
+          <p>Already have an Account? <b><a id="login" href="{%url 'login'%}">Sign In</a></b></p>
+        </div>
 
  </body>
 </html>

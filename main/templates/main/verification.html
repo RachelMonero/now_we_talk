@@ -3,15 +3,17 @@
  <head>
     <meta charset="UTF-8">
     <title>Now We Talk</title>
-    <!--
-    <link rel="stylesheet" href=".css">
-    -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'verification_styles.css' %}">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
  </head>
  <body>
     <header>
-        <h1>Now We Talk</h1>   
-
-        <form action="{% url 'verification'%}" method="POST">
+        <h1> Now We Talk</h1>   
+    </header>
+         <div class="input_box_container">
+          <form action="{% url 'verification'%}" method="POST">
             {% csrf_token %}
             <h2> Please enter your verification code </h2>
             {% if messages %}
@@ -21,10 +23,10 @@
                  {% endfor %}
                </script>
             {% endif %}
-            <input type="text" name="verification_code" id="verification_code" placeholder="Verification Code" class="inputBox" ><br/><br/>                     
+            <input type="text" name="verification_code" id="verification_code" placeholder="Verification Code" class="input_box" ><br/><br/>                     
             <input type="submit" value="ENTER" id="verification"> 
-        </form>    
-
+          </form>    
+         </div>
 
 
 

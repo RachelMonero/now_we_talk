@@ -3,39 +3,58 @@
  <head>
     <meta charset="UTF-8">
     <title>Now We Talk</title>
-    <!--
-    <link rel="stylesheet" href=".css">
-    -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home_basic.css' %}">
+    <link rel="stylesheet" href="{% static 'profile_style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
  </head>
  <body>
     <header>
-        <h1>Now We Talk</h1>   
+        <h1 id="application_name">Now We Talk</h1>   
         {% include 'main/navi_bar.html' %}
         <br/><br/> 
-    
+      </header> 
+      <div class=profile_container>   
         <form action="{% url 'profile'%}" method="POST">
 
             {% csrf_token %}
-            <label>Username</label>
-            <input type="text" name="original_username" id="original_username" placeholder="{{username}}" class="inputBox" readonly><br/><br/>
-            <label>Email</label>         
-            <input type="text" name="original_email" id="original_email" placeholder="{{email}}" class="inputBox" readonly><br/><br/> 
-            <label>Password</label>         
-            <input type="password" name="original_password" id="original_password" placeholder="*********" class="inputBox" readonly><br/><br/> 
-            <label>Full name</label>
-            <input type="text" name="original_first_name" id="original_first_name" placeholder="{{first_name}}" class="inputBox" readonly>
-            <input type="text" name="original_last_name" id="original_last_name" placeholder="{{last_name}}" class="inputBox" readonly><br/><br/> 
-            <label> Date of Birth</label>
-            <input type="text" name="original_date_of_birth" id="original_date_of_birth" placeholder="{{date_of_birth}}" class="inputBox" readonly><br/><br/> 
-            
-            <label>Language</label>
-            <input type="text" name="original_language" id="original_language" placeholder="{{language}}" class="inputBox"readonly>
-            <br/><br/>
-           
-            <input type="submit" value="EDIT" id="change_profil"> 
+            <div class=profile_body>
+              <div class=profile_row>         
+                <label>Username</label>
+                <input type="text" name="original_username" id="original_username" placeholder="{{username}}" class="inputBox" readonly><br/><br/>
+              </div>
+              <div class=profile_row>
+                <label>Email</label>         
+                <input type="text" name="original_email" id="original_email" placeholder="{{email}}" class="inputBox" readonly><br/><br/> 
+              </div>
+              <div class=profile_row>
+                <label>Password</label>         
+                <input type="password" name="original_password" id="original_password" placeholder="*********" class="inputBox" readonly><br/><br/> 
+              </div>
+              <div class=profile_row>
+                <label>First Name</label>
+                <input type="text" name="original_first_name" id="original_first_name" placeholder="{{first_name}}" class="inputBox" readonly><br/><br/> 
+              </div>
+              <div class=profile_row> 
+                <label>Last Name</label>
+                <input type="text" name="original_last_name" id="original_last_name" placeholder="{{last_name}}" class="inputBox" readonly><br/><br/> 
+              </div>
+              <div class=profile_row>
+                <label> Date of Birth</label>
+                <input type="text" name="original_date_of_birth" id="original_date_of_birth" placeholder="{{date_of_birth}}" class="inputBox" readonly><br/><br/> 
+              </div>
+              <div class=profile_row>
+                <label>Language</label>
+                <input type="text" name="original_language" id="original_language" placeholder="{{language}}" class="inputBox"readonly>
+              </div>
+                <br/><br/>
 
+
+            <input type="submit" value="EDIT" id="change_profil"> 
+          </div>
         </form>    
    <br/>
+  </div>
    {% if messages %}
      <script>
        {% for message in messages %}

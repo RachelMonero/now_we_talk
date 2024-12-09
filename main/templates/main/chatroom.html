@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <title>Now We Talk</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'chat_styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+ </head>
+ <body>
+
+<div id="chat_container_input">
+  <div id="chatroom_title">
+     <label>{{ admin_username }} {{ participant_username }}</label>
+  </div>
+  
+  <div id="chat_container">
+     <!-- TO Do: Chats will be displayed here  -->
+     {% if chatlist %} 
+     <ul id="chat-list">
+
+      {% for chat in chatlist %}
+
+      <li class="chat-row">
+          <div class="chat-head">
+            <strong id="creator"> {{ chat.creator_id.username }}</strong>
+            <a id="time"> {{ chat.created_at_timestamp }}</a>
+          </div>
+          <div class="chat-body">
+
+                {% if not chat.original_voice_msg %}
+                <div class="original">
+                  <a id="original_msg"> {{ chat.original_text_msg }}</a>
+                </div>
+                <div class="translated">  
+                  <a id="translated_msg"> {{ chat.translated_text_msg }}</a>
+                </div>
+                {%endif%}   
+
+                {% if chat.original_voice_msg %}
+                <audio controls class=original>
+                  <source src="{% url 'get_voice' chat.chat_id %}" type="audio/mpeg">
+                </audio>
+              </br>
+                
+                    <audio controls class="translated">
+                      <source src="{% url 'get_audio' chat.chat_id %}" type="audio/mpeg">
+                    </audio>
+                    <div class="translated">  
+                      <a id="translated_msg"> {{ chat.translated_text_msg }}</a>
+                    </div>
+                    
+                    
+                {% endif %}
+          </div>
+        </li>
+      {% endfor %}
+      </ul>  
+     {% endif %}
+  </div>
+  <br>
+
+  <div id="chat_input">
+     {% load static %}
+     {% csrf_token %}
+
+     <!-- Button to start voice recording -->
+     <button type="button" class="recordButton" id="startVoiceButton" onclick="startVoiceRecording()">
+        <img src="{% static 'images/microphone-svgrepo-com.svg' %}" alt="Voice Icon" width="40" height="40">
+     </button>
+     <!-- Pop-up for Stop Recording -->
+     <div id="recordingModal" style="display: none;">
+        <div class="modalContent">
+          <h3>Recording...</h3>
+          <button type="button" id="stopRecordingButton" onclick="stopVoiceRecording()">STOP</button>
+        </div>
+     </div>
+
+     <!-- Hidden Form for Voice Chat Submission -->
+     <form id="voiceForm" action="{% if chatroom_id %}{% url 'create_chat' chatroom_id %}{% else %}#{% endif %}" method="POST" enctype="multipart/form-data" style="display: none;">
+        {% csrf_token %}
+        <input type="hidden" name="chat_type" value="voice" />
+        <input type="hidden" name="participant_id" value="{{ participant_id }}" />
+        <input type="hidden" name="participant_language" value="{{ participant_language }}" />
+        <input type="hidden" name="admin_id" value="{{ admin_id }}" />
+        <input type="hidden" name="admin_language" value="{{ admin_language }}" />
+        <input type="file" name="voice_data" id="voice_data" />
+     </form>
+     <!-- Form for Text Chat -->
+    <div id="text_input">
+      <form action="{% if chatroom_id %}{% url 'create_chat' chatroom_id %}{% else %}#{% endif %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="chat_type" value="text" />
+        <input type="hidden" name="participant_id" value="{{ participant_id }}" />
+        <input type="hidden" name="participant_language" value="{{ participant_language }}" />
+        <input type="hidden" name="admin_id" value="{{ admin_id }}" />
+        <input type="hidden" name="admin_language" value="{{ admin_language }}" />
+        <input type="text" name="text_chat" id="text_chat" class="chat_inputBox" />
+        <input type="submit" value="ENTER" id="chat_enter">
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  let mediaRecorder;
+  let audioChunks = [];
+  const modal = document.getElementById("recordingModal");
+
+  function startVoiceRecording() {
+    // Request microphone access
+    navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(stream => {
+        // Initialize media recorder and start recording
+        mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.start();
+
+        audioChunks = [];
+        mediaRecorder.addEventListener("dataavailable", event => {
+          audioChunks.push(event.data);
+        });
+
+        mediaRecorder.addEventListener("stop", () => {
+          // Convert audio chunks to a blob and create file
+          const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+          const audioFile = new File([audioBlob], "voice_message.wav", { type: "audio/wav" });
+
+          // Attach the audio file to the form
+          const voiceInput = document.getElementById("voice_data");
+          const dataTransfer = new DataTransfer();
+          dataTransfer.items.add(audioFile);
+          voiceInput.files = dataTransfer.files;
+
+          // Submit the form with audio data
+          document.getElementById("voiceForm").submit();
+        });
+
+        // Show the recording modal
+        modal.style.display = "block";
+      })
+      .catch(error => {
+        console.error("Error accessing microphone:", error);
+        alert("Could not access microphone. Please check permissions.");
+      });
+  }
+
+  function stopVoiceRecording() {
+    // Stop the recording if mediaRecorder is active
+    if (mediaRecorder && mediaRecorder.state === "recording") {
+      mediaRecorder.stop();
+      modal.style.display = "none"; // Close the recording modal
+    }
+  }
+</script>
+
+</body>
+</html>

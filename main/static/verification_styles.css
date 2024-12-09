@@ -1,0 +1,103 @@
+
+* {
+ 
+    font-family: sans-serif;
+    
+
+}
+header{
+    display: flex;
+    align-items: center;
+    justify-content: center;	
+}
+/* logo for signup/login page. */
+h1{
+    font-family: 'Bungee', sans-serif;
+    font-size: 52px;
+    color: #1babff;
+    position: relative;
+    border-radius: 50px;
+
+    display: inline-block;
+    text-align: center;
+    z-index: 1;
+}
+h2{
+    color:#868686;
+    font-weight: 600;
+}
+h1::before {
+    content: '';
+    position: absolute;
+    left: -5%;
+    bottom: 0;
+    width: 110%;
+    height: 40%; /* Covers the bottom half of the text */
+    background-color: white;
+    border-radius: 50px; /* Round the bottom part */
+    z-index: -1; /* Ensures the background is behind the text */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+
+body{
+    background-color: #ffee95;
+    margin: 0;
+    padding:0;
+
+}
+
+.input_box_container{
+
+    display: flex; /* Enable flexbox */
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    
+    width: 420px;
+    height: 200px;
+    overflow: hidden;
+    margin: 20px auto;
+    padding: 80px;       
+    background-color: #7ED0FF;
+    border-radius: 30px ;
+
+}
+
+  #verification_code{
+	background-color: white;
+	outline: none;
+
+    margin-bottom: 20px;
+    padding-left: 13px;
+    border-radius: 10px;
+    border: 0.1px solid lightgrey;
+    border-bottom-width: 0.5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 15px;
+    width: 380px;
+    height: 30px;
+    color: #9f9f9fc6;
+	
+}
+
+.input_box::placeholder {
+    color: #D9D9D9;
+    opacity: 1; 
+}
+
+#verification{
+
+    background-color: #ffee95;
+    outline: none;
+    margin: 20px 28% ;
+    border-radius: 19px;
+    text-align: center;
+    border: 0.5px solid lightgrey;
+    border-bottom-width: 1px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    font-weight: bold;
+    width: 180px;
+    height: 30px;
+    color: #7ED0FF;
+}

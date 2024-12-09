@@ -1,9 +1,15 @@
-<label>Friends</label>
-<ul>
-    {% for friend in friendslist %}
-    <li> 
 
-       <a href="{% url 'create_chatroom' friend.user_id %}"> {{friend.username}} </a>
+<label id="friend_list_title">Friends</label>
+{% load static %}
+<ul class="friend_list_container">
+    {% for friend in friendslist %}
+    <li id="friend_list_row"> 
+        <form action="{% url 'open_chat' friend.user_id %}" method="POST" style="display: inline;">
+            {% csrf_token %}
+            
+            <button type="submit" id="open_chat"><img src="{% static 'images/chat.svg' %}" alt="Chat Icon" width="18" height="18"></button>
+        </form>
+        <a id="friend_username"> {{friend.username}} </a>
     </li>
     {% endfor %}
 </ul>

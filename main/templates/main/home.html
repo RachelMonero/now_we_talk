@@ -1,26 +1,32 @@
+
 <!DOCTYPE html>
 <html lang="en">
  <head>
     <meta charset="UTF-8">
     <title>Now We Talk</title>
-    <!--
-    <link rel="stylesheet" href=".css">
-    -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home_basic.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
  </head>
  <body>
     <header>
-        <h1>Now We Talk</h1>   
+        <h1 id="application_name">Now We Talk</h1>   
+ 
         {% include 'main/navi_bar.html' %}
+    </header>   
         <br/><br/> 
-        {% include 'main/friendlist.html' %}
-    
-        <form action="{% url 'home'%}" method="POST">
 
-            {% csrf_token %}
-            <input type="text" name="username" id="username" placeholder="Username" class="inputBox" ><br/><br/>         
-            <input type="text" name="email" id="email" placeholder="Email" class="inputBox"><br/><br/> 
-            <input type="submit" value="Generate Temperary Password" id="pw_recovery"> 
-        </form>    
+         <div class = "friendlist_chatroom_container">
+            <div id="friendlist_full_container">
+              {% include 'main/friendlist.html' %}
+            </div>
+            <br/><br/> 
+
+            <div id="chatroom_container">
+             {% include 'main/chatroom.html' %}
+            </div>
+        </div>
+    
    <br/>
    {% if messages %}
      <script>
@@ -29,8 +35,9 @@
         {% endfor %}
      </script>
    {% endif %}
-   <p>Don't have an accout? <b><a id="signup" href="{%url 'signup'%}">Sign up</a></b></p>
+
 
 
  </body>
+
 </html>

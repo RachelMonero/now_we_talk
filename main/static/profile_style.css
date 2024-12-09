@@ -1,0 +1,101 @@
+/* Container for the Profile Section */
+.profile_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 800px; /* Ensures it doesn't get too wide */
+    height: auto; /* Adjusts height based on content */
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px 40px;
+}
+
+
+.profile_body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+.profile_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+
+.profile_body label {
+    flex: 0 0 150px; 
+    font-weight: bold;
+    color:#9f9f9fc6;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.inputBox {
+
+    background-color: white;
+    outline: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: 1px solid lightgrey;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    color: #9f9f9fc6 ;
+    width: 300px;
+
+}
+.inputBox::placeholder {
+    color:#9f9f9fc6 !important;
+}
+
+.inputBox-lan {
+    appearance: none;
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+
+    background-color: white;
+    outline: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: 1px solid lightgrey;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    color: #9f9f9fc6;
+    width: 320px;
+
+
+}
+
+
+#change_profil {
+    align-self: center;
+    width: 150px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #7ED0FF;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#change_profil:hover {
+    background-color: #5bb9dd;
+    transform: translateY(-2px);
+}
+
+#change_profil:active {
+    background-color: #4aa4c7;
+    transform: translateY(0);
+}

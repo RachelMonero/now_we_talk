@@ -1,0 +1,90 @@
+
+
+
+.friends_main_body{
+    display: flex; /* Enable flexbox */
+    flex-direction: column; 
+    align-items: center;
+    list-style-type: none; 
+
+    margin: 0 auto;
+    border-collapse: collapse; 
+    width: 80%;
+    height: 600px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+
+
+
+.friends_body_subhead a{
+
+    color:#7ED0FF
+ 
+ }
+
+
+.friendlist_management_container{
+            
+    justify-content: center;        
+    align-items: center;  
+    list-style-type: none;
+    margin: 0 auto;
+    
+    border-collapse: collapse; 
+    width: 80%;
+    height: 300px;
+    background-color:none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+.thead_container th{
+    padding-left: 2%;
+}
+.tbody_container td{
+    padding-left: 3%;
+    
+}
+
+.thead_container tr{
+    background-color: #ffed9581;
+	outline: none;
+    border: none;
+    padding: 2px;
+    margin: 2px;
+    text-align: left;
+    border-radius: 50px;
+
+    border-bottom-width: 0.5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 15px;
+
+    width: 70%;
+    height: 30px;
+    font-weight: 600;
+    align-self: auto;
+    color: #D9D9D9;
+}
+#delete_button{
+    margin-top:15px;
+    width: 22px;
+    height: 22px;
+    border-radius: 10%;
+    border: none;
+
+    background-color: #ffee95;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    color:#7ED0FF;
+    font-weight: bolder;
+    font-size:16px;
+    align-items: center;
+
+}
+
+.td_letter{
+    color:#9f9f9fc6
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <title>Now We Talk</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home_basic.css' %}">
+    <link rel="stylesheet" href="{% static 'friends_styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+ </head>
+ <body>
+    <header>
+        <h1 id="application_name">Now We Talk</h1>   
+    </header>
+    {% include 'main/navi_bar.html' %}
+    <br/><br/> 
+    <div class="friends_main_body">
+      </br>
+
+      <div class="friends_body_subhead">
+
+          <a id="search" href="{%url 'search'%}"> Search more friends 🔍</a></b></p>
+      </div> 
+      
+       {% include 'main/friendlist_management.html' %}
+      <br/>
+    </div>  
+ 
+
+   {% if messages %}
+     <script>
+       {% for message in messages %}
+          alert("{{ message }}");
+        {% endfor %}
+     </script>
+   {% endif %}
+
+
+
+ </body>
+</html>
